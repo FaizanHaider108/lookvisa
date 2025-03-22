@@ -35,7 +35,7 @@ async function createOrderCallback() {
       throw new Error("Failed to get access token");
     }
 
-    const response = await fetch(`https://api-m.paypal.com/v2/checkout/orders`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_PAYPAL_API_URL}/v2/checkout/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST() {
     try {
-        const response = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_PAYPAL_API_URL}/v1/oauth2/token`, {
             method: "POST",
             headers: {
                 Authorization: "Basic " + Buffer.from(`${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_SECRET}`).toString("base64"),
@@ -15,7 +15,7 @@ export async function POST() {
         if (!data.access_token) {
             throw new Error("Failed to get access token");
         }
-        const tokenResponse = await fetch("https://api-m.paypal.com/v1/identity/generate-token", {
+        const tokenResponse = await fetch(`${process.env.NEXT_PUBLIC_PAYPAL_API_URL}/v1/identity/generate-token`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${data.access_token}`,
